@@ -24,6 +24,7 @@ class PersonalMusicPlayer:
             Song("Saan", "Maki", "static/music/Maki - Saan.flac", "Pop", "Chill", "static/images/Maki - Saan.jpg"),
             Song("Porque", "Maldita", "static/music/Maldita - Porque.flac", "Soft-Rock", "Chill", "static/images/Maldita - Porque.jpg"),
             Song("Never Be The Same", "Camila Cabello", "static/music/Camila Cabello - Never Be the Same (Radio Edit).flac", "RnB", "Focus", "static/images/Camila Cabello - Camila.jpg"),
+            Song("Birds of a Feather", "Billie Eilish", "static/music/Camila Cabello - Billie_Eilish_-_BIRDS_OF_A_FEATHER_Official_Music_Video.mp3", "Electric", "Chill"),
             Song("Ma Meilleure Ennemie (from Arcane Season 2)", "Stromae, Pomme", "static/music/Stromae, Pomme - Ma Meilleure Ennemie (from Arcane Season 2) .mp3", "ElectroPop", "Workout", "static/images/Arcane season 2 album art.jpg")
         ]
     
