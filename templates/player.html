@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Personal Music Player - Project</title>
+        <link rel="stylesheet" href="static/style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    </head>
+    <body>
+        <button class="theme-toggle" onclick="toggleTheme()">
+            🌓
+        </button>
+        <div class="player-container">
+            <h1>My Music Collection</h1>
+            
+            <div class="mood-selector">
+                {% for mood in moods %}
+                <button onclick="filterByMood('{{ mood }}')">{{ mood }}</button>
+                {% endfor %}
+            </div>
+
+            <div class="file-upload">
+                <form id="uploadForm" action="/upload" method="POST" enctype="multipart/form-data">
+                    <input type="file" name="music_file" accept=".mp3,.flac" required>
+                    <select name="mood" required>
+                        {% for mood in moods %}
+                        <option value="{{ mood }}">{{ mood }}</option>
+                        {% endfor %}
+                    </select>
+                    <input type="text" name="title" placeholder="Song Title" required>
+                    <input type="text" name="artist" placeholder="Artist Name" required>
+                    <button type="submit">Upload Song</button>
+                </form>
+            </div>
+
+            <div class="player">
+                <audio id="audio-player">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+
+            <div class="playlist">
+                {% for song in songs %}
+                <div class="song-item" 
+                     data-index="{{ loop.index }}"
+                     data-filepath="{{ song.file_path }}"
+                     data-title="{{ song.title }}"
+                     data-artist="{{ song.artist }}"
+                     onclick="playSong('{{ song.file_path }}', {'title': '{{ song.title }}', 'artist': '{{ song.artist }}'})">
+                    <h3>{{ song.title }}</h3>
+                    <p>{{ song.artist }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="now-playing-container">
+            <div class="now-playing">
+                <img id="album-art" src="static/images/default-album.png" alt="Album Art">
+                <div class="song-info">
+                    <h2 id="now-playing-title">No Track Playing</h2>
+                    <p id="now-playing-artist">-</p>
+                </div>
+                <div class="player-controls">
+                    <div class="time-control">
+                        <span id="current-time">0:00</span>
+                        <input type="range" id="progress-bar" min="0" max="100" value="0">
+                        <span id="duration">0:00</span>
+                    </div>
+                    <button onclick="previousSong()"><i class="fas fa-step-backward"></i></button>
+                    <button id="repeat-button" onclick="toggleRepeat()"><i class="fas fa-repeat"></i></button>
+                    <button onclick="togglePlay()"><i id="play-pause-icon" class="fas fa-play"></i></button>
+                    <button onclick="nextSong()"><i class="fas fa-step-forward"></i></button>
+                    <div class="volume-control">
+                        <i class="fas fa-volume-up"></i>
+                        <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="1">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="static/script.js"></script>
+    </body>
+</html>
